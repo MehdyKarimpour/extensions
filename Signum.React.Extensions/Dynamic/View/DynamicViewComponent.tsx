@@ -18,6 +18,7 @@ import * as DynamicViewClient from '../DynamicViewClient'
 import { DynamicViewInspector, CollapsableTypeHelp } from './Designer'
 import { DynamicViewTree } from './DynamicViewTree'
 import ShowCodeModal from './ShowCodeModal'
+import SplitterLayout from '../Splitter/SplitterLayout'
 import { DynamicViewEntity, DynamicViewOperation, DynamicViewMessage } from '../Signum.Entities.Dynamic'
 
 import "./DynamicView.css"
@@ -98,29 +99,29 @@ export default class DynamicViewComponent extends React.Component<DynamicViewCom
 
         var vos = this.state.viewOverrides.filter(a => a.viewName == this.state.dynamicView.viewName);
 
-        if (!Navigator.isViewable(DynamicViewEntity)) {
+        if (!Navigator.isViewable(DynamicViewEntity) || !this.state.isDesignerOpen) {
             return (
-                <div className="design-content">
+                <div>
+                    {Navigator.isViewable(DynamicViewEntity) && <i className="fa fa-pencil-square-o design-open-icon" aria-hidden="true" onClick={this.handleOpen}></i> }
                     {NodeUtils.renderWithViewOverrides(rootNode, ctx, vos)}
                 </div>
             );
         }
-        return (<div className="design-main">
-            <div className={classes("design-left", this.state.isDesignerOpen && "open")}>
-                {!this.state.isDesignerOpen ?
-                    <i className="fa fa-pencil-square-o design-open-icon" aria-hidden="true" onClick={this.handleOpen}></i> :
+        return (
+            <SplitterLayout>
+                <div style={{margin: "0px 10px"}}>
                     <DynamicViewDesigner
                         rootNode={rootNode}
                         dynamicView={this.state.dynamicView}
                         onReload={this.handleReload}
                         onLoseChanges={this.handleLoseChanges}
                         typeName={ctx.value.Type} />
-                }
-            </div>
-            <div className={classes("design-content", this.state.isDesignerOpen && "open")}>
-                {NodeUtils.renderWithViewOverrides(rootNode, ctx, vos)}
-            </div>
-        </div>);
+                </div>
+                <div style={{ margin: "0px 10px" }}>
+                    {NodeUtils.renderWithViewOverrides(rootNode, ctx, vos)}
+                </div>
+            </SplitterLayout>
+        );
     }
 
     handleLoseChanges = () => {

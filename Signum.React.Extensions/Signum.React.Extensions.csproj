@@ -168,6 +168,8 @@
     <Compile Include="Dynamic\DynamicViewController.cs" />
     <Compile Include="Dynamic\DynamicServer.cs" />
     <TypeScriptCompile Include="DiffLog\Templates\DiffDocument.tsx" />
+    <TypeScriptCompile Include="Dynamic\Splitter\Pane.tsx" />
+    <TypeScriptCompile Include="Dynamic\Splitter\SplitterLayout.tsx" />
     <TypeScriptCompile Include="MachineLearning\Templates\LineChart.tsx" />
     <TypeScriptCompile Include="MachineLearning\Templates\PredictModal.tsx" />
     <TypeScriptCompile Include="MachineLearning\Templates\NeuralNetworkSettings.tsx" />
@@ -179,6 +181,7 @@
     <TypeScriptCompile Include="MachineLearning\Templates\ProgressBar.tsx" />
     <TypeScriptCompile Include="TypeHelp\TypeHelpClient.tsx" />
     <TypeScriptCompile Include="TypeHelp\TypeHelpButtonBarComponent.tsx" />
+    <Content Include="Dynamic\Splitter\Splitter.css" />
     <Compile Include="Excel\ExcelController.cs" />
     <Compile Include="Excel\ExcelServer.cs" />
     <Compile Include="Files\FilesController.cs" />
